@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="form-inline"  action="create" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="lastname">Numéro:</label>
+        <input type="text" name="numero" id="form-control" style="width:30%;" required="required"/><br />
+        <label for="firstname">Nom:</label>
+        <input type="text" name="nom" id="form-control" style="width:30%;" required="required"/><br />
+        <label for="lastname">Prénom:</label>
+        <input type="text" name="prenom" id="form-control" style="width:30%;" required="required"/><br />
+        <label for="lastname">Email:</label>
+        <input type="text" name="email" id="form-control" style="width:30%;" required="required"/><br />
+        <label for="lastname">Adresse:</label>
+        <input type="text" name="adresse" id="form-control" style="width:30%;" required="required"/><br />
+        <button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter</button>
+    </div>
+</form>
+<hr style="border-top:1px dotted #000;"/>
+<br />
+<table class="table-bordered">
+<caption> Listes des étudiants</caption>
+    <thead class="alert-warning">
+        <tr>
+            <th>Numéro</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Email</th>
+            <th>Adress</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.numero }}</td>
+            <td>{{ member.nom }}</td>
+            <td>{{ member.prenom }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.adresse }}</td>
+            <td>
+				<center>
+					<a id="btn-warning" href="edit/{{ member.id }}">Edit</a> 
+					<a id="btn-warning" href="delete/{{ member.id }}"> Delete</a>
+				</center>
+			</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
